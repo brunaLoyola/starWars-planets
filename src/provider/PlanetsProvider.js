@@ -18,7 +18,6 @@ function PlanetsProvider({ children }) {
     <PlanetsContext.Provider value={ { planets } }>
       <div>
         { children }
-        {console.log(planets)}
       </div>
     </PlanetsContext.Provider>
   );
