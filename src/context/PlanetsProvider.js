@@ -9,6 +9,7 @@ function PlanetsProvider({ children }) {
   const [columnFilter, setColumnFilter] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [number, setNumber] = useState(0);
+  const [sort, setSort] = useState('ASC');
   const [filters, setFilters] = useState([]);
 
   useEffect(() => {
@@ -41,6 +42,26 @@ function PlanetsProvider({ children }) {
     }
   }, [columnFilter, comparison, number, planets, filters]);
 
+  const handleButtonSort = useCallback(() => {
+    if (sort.includes('ASC')) {
+      const unknown = planets.filter((e) => e[columnFilter] === 'unknown');
+      const exist = planets.filter((e) => e[columnFilter] !== 'unknown');
+      const arraysort = exist.sort((a, b) => Number(a[columnFilter])
+      - Number(b[columnFilter]));
+      setInfoPlanets([...arraysort, ...unknown]);
+      setFilters([...filters,
+        { columnFilter, sort }]);
+    } else if (sort.includes('DESC')) {
+      const unknown = planets.filter((e) => e[columnFilter] === 'unknown');
+      const exist = planets.filter((e) => e[columnFilter] !== 'unknown');
+      const arraysort = exist
+        .sort((a, b) => Number(b[columnFilter]) - Number(a[columnFilter]));
+      setInfoPlanets([...arraysort, ...unknown]);
+      setFilters([...filters,
+        { columnFilter, sort }]);
+    }
+  }, [columnFilter, sort, filters, planets]);
+
   const values = useMemo(() => ({
     planets,
     search,
@@ -51,6 +72,8 @@ function PlanetsProvider({ children }) {
     comparison,
     setComparison,
     number,
+    setSort,
+    handleButtonSort,
     setNumber,
   }), [search,
     setSearch,
@@ -60,7 +83,9 @@ function PlanetsProvider({ children }) {
     setColumnFilter,
     comparison,
     setComparison,
+    setSort,
     number,
+    handleButtonSort,
     setNumber,
   ]);
 
