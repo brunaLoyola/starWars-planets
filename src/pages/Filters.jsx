@@ -8,8 +8,8 @@ function Filters() {
     buttonFilter,
     columnFilter,
     setColumnFilter,
-    comparasion,
-    setComparasion,
+    comparison,
+    setComparison,
     number,
     setNumber } = useContext(PlanetsContext);
   return (
@@ -41,8 +41,8 @@ function Filters() {
           name="comparison-filter"
           id="comparison-filter"
           data-testid="comparison-filter"
-          value={ comparasion }
-          onChange={ ({ target }) => setComparasion(target.value) }
+          value={ comparison }
+          onChange={ ({ target }) => setComparison(target.value) }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>

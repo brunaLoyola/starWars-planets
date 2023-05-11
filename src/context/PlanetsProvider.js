@@ -7,8 +7,9 @@ function PlanetsProvider({ children }) {
   const [search, setSearch] = useState('');
   const [planets, setInfoPlanets] = useState([]);
   const [columnFilter, setColumnFilter] = useState('population');
-  const [comparasion, setComparasion] = useState('maior que');
+  const [comparison, setComparison] = useState('maior que');
   const [number, setNumber] = useState(0);
+  const [filters, setFilters] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -19,20 +20,26 @@ function PlanetsProvider({ children }) {
   }, []);
 
   const buttonFilter = useCallback(() => {
-    if (comparasion.includes('maior que')) {
+    if (comparison.includes('maior que')) {
       const filter = planets.filter((planet) => Number(planet[columnFilter])
        > Number(number));
       setInfoPlanets(filter);
-    } else if (comparasion.includes('menor que')) {
+      setFilters([...filters,
+        { columnFilter, comparison, number }]);
+    } else if (comparison.includes('menor que')) {
       const filter = planets.filter((planet) => Number(planet[columnFilter])
       < Number(number));
       setInfoPlanets(filter);
-    } else if (comparasion.includes('igual a')) {
+      setFilters([...filters,
+        { columnFilter, comparison, number }]);
+    } else if (comparison.includes('igual a')) {
       const filter = planets.filter((planet) => Number(planet[columnFilter])
        === Number(number));
       setInfoPlanets(filter);
+      setFilters([...filters,
+        { columnFilter, comparison, number }]);
     }
-  }, [columnFilter, comparasion, number, planets]);
+  }, [columnFilter, comparison, number, planets, filters]);
 
   const values = useMemo(() => ({
     planets,
@@ -41,8 +48,8 @@ function PlanetsProvider({ children }) {
     buttonFilter,
     columnFilter,
     setColumnFilter,
-    comparasion,
-    setComparasion,
+    comparison,
+    setComparison,
     number,
     setNumber,
   }), [search,
@@ -51,8 +58,8 @@ function PlanetsProvider({ children }) {
     buttonFilter,
     columnFilter,
     setColumnFilter,
-    comparasion,
-    setComparasion,
+    comparison,
+    setComparison,
     number,
     setNumber,
   ]);
