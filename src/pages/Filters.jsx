@@ -8,9 +8,12 @@ function Filters() {
     buttonFilter,
     columnFilter,
     setColumnFilter,
+    handleDeleteAllFilters,
     comparison,
+    filtersColumn,
     setComparison,
     handleButtonSort,
+    setColumnFilterSort,
     setSort,
     number,
     setNumber } = useContext(PlanetsContext);
@@ -33,11 +36,11 @@ function Filters() {
           data-testid="column-filter"
           onChange={ ({ target }) => setColumnFilter(target.value) }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {filtersColumn.map((filter) => (
+            <option key={ filter } value={ filter }>
+              {filter}
+            </option>
+          ))}
         </select>
         <select
           name="comparison-filter"
@@ -71,7 +74,7 @@ function Filters() {
           id="colum-filter"
           value={ columnFilter }
           data-testid="column-sort"
-          onChange={ ({ target }) => setColumnFilter(target.value) }
+          onChange={ ({ target }) => setColumnFilterSort(target.value) }
         >
           <option value="population">population</option>
           <option value="orbital_period">orbital_period</option>
@@ -111,6 +114,15 @@ function Filters() {
         >
           ORDENAR
         </button>
+
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ handleDeleteAllFilters }
+        >
+          Remover todas filtragens
+        </button>
+
       </form>
     </div>
   );
