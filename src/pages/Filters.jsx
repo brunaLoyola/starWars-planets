@@ -29,39 +29,48 @@ function Filters() {
         />
       </section>
       <form>
-        <select
-          name="colum-filter"
-          id="colum-filter"
-          value={ columnFilter }
-          data-testid="column-filter"
-          onChange={ ({ target }) => setColumnFilter(target.value) }
-        >
-          {filtersColumn.map((filter) => (
-            <option key={ filter } value={ filter }>
-              {filter}
-            </option>
-          ))}
-        </select>
-        <select
-          name="comparison-filter"
-          id="comparison-filter"
-          data-testid="comparison-filter"
-          value={ comparison }
-          onChange={ ({ target }) => setComparison(target.value) }
-        >
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
-        </select>
-        <input
-          type="number"
-          name="value-filter"
-          id="value-filter"
-          data-testid="value-filter"
-          min={ 0 }
-          value={ number }
-          onChange={ ({ target }) => setNumber(target.value) }
-        />
+        <label htmlFor="column-filter">
+          Column
+          <select
+            name="colum-filter"
+            id="colum-filter"
+            value={ columnFilter }
+            data-testid="column-filter"
+            onChange={ ({ target }) => setColumnFilter(target.value) }
+          >
+            {filtersColumn.map((filter) => (
+              <option key={ filter } value={ filter }>
+                {filter}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="comparison-filter">
+          Comparison
+          <select
+            name="comparison-filter"
+            id="comparison-filter"
+            data-testid="comparison-filter"
+            value={ comparison }
+            onChange={ ({ target }) => setComparison(target.value) }
+          >
+            <option value="maior que">maior que</option>
+            <option value="menor que">menor que</option>
+            <option value="igual a">igual a</option>
+          </select>
+        </label>
+        <label htmlFor="value-filter">
+          Value
+          <input
+            type="number"
+            name="value-filter"
+            id="value-filter"
+            data-testid="value-filter"
+            min={ 0 }
+            value={ number }
+            onChange={ ({ target }) => setNumber(target.value) }
+          />
+        </label>
         <button
           type="button"
           data-testid="button-filter"

@@ -35,11 +35,11 @@ function PlanetsProvider({ children }) {
       const filter = planets.filter((planet) => Number(planet[columnFilter])
        > Number(number));
       setInfoPlanets(filter);
-    } else if (comparison.includes('menor que')) {
+    } if (comparison.includes('menor que')) {
       const filter = planets.filter((planet) => Number(planet[columnFilter])
       < Number(number));
       setInfoPlanets(filter);
-    } else if (comparison.includes('igual a')) {
+    } if (comparison.includes('igual a')) {
       const filter = planets.filter((planet) => Number(planet[columnFilter])
        === Number(number));
       setInfoPlanets(filter);
@@ -62,7 +62,7 @@ function PlanetsProvider({ children }) {
       setInfoPlanets([...arraysort, ...unknown]);
       setFilters([...filters,
         { columnFilterSort, sort }]);
-    } else if (sort.includes('DESC')) {
+    } if (sort.includes('DESC')) {
       const unknown = planets.filter((e) => e[columnFilterSort] === 'unknown');
       const exist = planets.filter((e) => e[columnFilterSort] !== 'unknown');
       const arraysort = exist
@@ -73,32 +73,32 @@ function PlanetsProvider({ children }) {
     }
   }, [columnFilterSort, sort, filters, planets]);
 
-  const removeFilter = useCallback((value) => {
-    const column = value.columnFilter;
-    setFiltersColumn([...filtersColumn, column]);
-    const newFilters = [...filters];
-    const index = newFilters.indexOf(value);
-    newFilters.splice(index, 1);
-    setFilters(newFilters);
+  // const removeFilter = useCallback((value) => {
+  //   const column = value.columnFilter;
+  //   setFiltersColumn([...filtersColumn, column]);
+  //   const newFilters = [...filters];
+  //   const index = newFilters.indexOf(value);
+  //   newFilters.splice(index, 1);
+  //   setFilters(newFilters);
 
-    let filteredPlanets = initialStateApi;
-    newFilters.forEach((filter) => {
-      const columnFilterAtt = filter.columnFilter;
-      const comparisonAtt = filter.comparison;
-      const numberAtt = filter.number;
-      filteredPlanets = filteredPlanets.filter((planet) => {
-        if (comparisonAtt.includes('maior que')) {
-          return Number(planet[columnFilterAtt]) > Number(numberAtt);
-        } if (comparisonAtt.includes('menor que')) {
-          return Number(planet[columnFilterAtt]) < Number(numberAtt);
-        } if (comparisonAtt.includes('igual a')) {
-          return Number(planet[columnFilterAtt]) === Number(numberAtt);
-        }
-        return true;
-      });
-    });
-    setInfoPlanets(filteredPlanets);
-  }, [filters, filtersColumn, initialStateApi]);
+  //   let filteredPlanets = initialStateApi;
+  //   newFilters.forEach((filter) => {
+  //     const columnFilterAtt = filter.columnFilter;
+  //     const comparisonAtt = filter.comparison;
+  //     const numberAtt = filter.number;
+  //     filteredPlanets = filteredPlanets.filter((planet) => {
+  //       if (comparisonAtt.includes('maior que')) {
+  //         return Number(planet[columnFilterAtt]) > Number(numberAtt);
+  //       } if (comparisonAtt.includes('menor que')) {
+  //         return Number(planet[columnFilterAtt]) < Number(numberAtt);
+  //       } if (comparisonAtt.includes('igual a')) {
+  //         return Number(planet[columnFilterAtt]) === Number(numberAtt);
+  //       }
+  //       return true;
+  //     });
+  //   });
+  //   setInfoPlanets(filteredPlanets);
+  // }, [filters, filtersColumn, initialStateApi]);
 
   const handleDeleteAllFilters = useCallback(() => {
     setInfoPlanets(initialStateApi);
@@ -121,7 +121,7 @@ function PlanetsProvider({ children }) {
     setSort,
     handleButtonSort,
     setNumber,
-    removeFilter,
+    // removeFilter,
     filters,
     handleDeleteAllFilters,
   }), [search,
@@ -130,7 +130,7 @@ function PlanetsProvider({ children }) {
     filtersColumn,
     setFiltersColumn,
     planets,
-    removeFilter,
+    // removeFilter,
     buttonFilter,
     columnFilter,
     setColumnFilter,

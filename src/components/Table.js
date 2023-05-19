@@ -13,27 +13,27 @@ const tabela = ['name', 'rotation_period', 'orbital_period',
   'edited',
   'url'];
 function Table() {
-  const { planets, search, filters, removeFilter } = useContext(PlanetsContext);
-  console.log(filters);
+  const { planets, search, filters } = useContext(PlanetsContext);
   const mappedFiltersArray = filters.map((filter) => {
     const { columnFilter, comparison, number } = filter;
     return `${columnFilter} ${comparison} ${number}`;
   });
   return (
     <>
-      {filters === null ? '' : (
+      {filters !== null && (
         mappedFiltersArray.map((mapped, index) => (
           <div data-testid="filter" key={ index }>
             <p>
               {mapped}
             </p>
-            <button
+            {/* <button
+              data-testid="buttonDelete"
               value={ JSON.stringify(filters[index]) }
               onClick={ ({ target }) => removeFilter(JSON.parse(target.value)) }
             >
               🗑
 
-            </button>
+            </button> */}
           </div>
         ))
       )}
